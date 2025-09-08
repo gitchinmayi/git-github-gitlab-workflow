@@ -6,4 +6,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Run a one-line script
-      run: echo ✅ GitHub Actions is running fine!
+      run: echo "✅ GitHub Actions is running fine!"
