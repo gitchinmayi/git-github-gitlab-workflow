@@ -1,0 +1,40 @@
+@"
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.code-workspace
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.py[cod]
+env/
+venv/
+.venv/
+
+# Java/IDE
+*.class
+*.jar
+target/
+.idea/
+
+# Docker
+**/Dockerfile
+**/docker-compose*.yml
+
+# Logs
+*.log
+
+# System
+*.swp
+
+# Git hooks local state (do NOT commit your local hooks!)
+hooks/*.local
+"@ | Out-File -Encoding utf8 .gitignore
