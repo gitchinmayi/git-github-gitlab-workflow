@@ -1,7 +1,10 @@
 stages:
-  - build
+  - test
 
-build_job:
-  stage: build
+ci_test:
+  stage: test
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache bash
   script:
-    - echo "✅ GitLab CI pipeline running fine!"
+    - bash scripts/run_tests.sh
