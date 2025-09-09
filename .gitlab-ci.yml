@@ -49,10 +49,9 @@ build:
 
 deploy_simulation:
   stage: deploy
-  image: alpine:latest
+  image: python:3.9   # ✅ changed from alpine to python
   only:
     - main
   script:
-    - echo "SIMULATED DEPLOY:would deploy dist/* to production server"
-
-
+    - echo "SIMULATED DEPLOY: would deploy dist/* to production server"
+    - ls -l dist/
