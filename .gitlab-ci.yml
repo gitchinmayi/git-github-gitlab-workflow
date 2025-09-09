@@ -1,9 +1,56 @@
 stages:
+  - lint
   - test
+  - build
+  - deploy
 
-pytest-job:
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+  paths:
+    - .cache/pip
+
+before_script:
+  - python --version
+  - pip install --upgrade pip
+
+lint:
+  stage: lint
+  image: python:3.9
+  script:
+    - pip install flake8
+    - flake8 .
+  tags: []
+
+pytest_job:
   stage: test
   image: python:3.9
   script:
-    - pip install pytest
-    - pytest
+    - pip install -r requirements.txt
+    - mkdir -p reports
+    - pytest --junitxml=reports/junit.xml -q
+  artifacts:
+    paths:
+      - reports/junit.xml
+    when: always
+
+build:
+  stage: build
+  image: python:3.9
+  script:
+    - mkdir -p dist
+    - echo "dummy build artifact" > dist/build.txt
+  artifacts:
+    paths:
+      - dist/*
+    expire_in: 1 week
+
+deploy_simulation:
+  stage: deploy
+  image: alpine:latest
+  only:
+    - main
+  script:
+   - echo "SIMULATED DEPLOY:would deploy dist/* to production server"
