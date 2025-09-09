@@ -52,5 +52,7 @@ deploy_simulation:
   image: alpine:latest
   only:
     - main
-  script: 
-  - echo "SIMULATED DEPLOY: would deploy dist/* to production server"
+  script:
+    - echo "SIMULATED DEPLOY:would deploy dist/* to production server"
+
+
