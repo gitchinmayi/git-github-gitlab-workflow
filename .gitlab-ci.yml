@@ -1,10 +1,9 @@
 stages:
   - test
 
-ci_test:
+pytest-job:
   stage: test
-  image: alpine:latest
-  before_script:
-    - apk add --no-cache bash
+  image: python:3.9
   script:
-    - bash scripts/run_tests.sh
+    - pip install pytest
+    - pytest

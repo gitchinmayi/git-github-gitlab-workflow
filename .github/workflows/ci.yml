@@ -1,13 +1,19 @@
 name: CI
 on: [push, pull_request]
+
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Make scripts executable (not required but safe)
-      run: chmod +x scripts/run_tests.sh || true
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
 
-    - name: Run tests script
-      run: bash scripts/run_tests.sh
+      - name: Install dependencies
+        run: pip install pytest
+
+      - name: Run tests
+        run: pytest
